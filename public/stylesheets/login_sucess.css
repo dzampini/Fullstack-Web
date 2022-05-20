@@ -1,0 +1,36 @@
+.navbar{
+    float:right;
+    margin-top: 2em;
+        display: flex;
+        
+        margin-right: 1em;
+}
+.container{
+    margin-top: 0px;
+    margin-left: 7em;
+}
+#registros{
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+}
+
+.text-end{
+    color: azure;
+}
+.row-button-ag{
+    margin-top: 2em;
+    display: flex;
+    float: right;
+    margin-right:  1em;
+    
+}
+.row-button-ses{
+   
+
+}
+
+.table {
+    margin-top: 4em;
+}
+
