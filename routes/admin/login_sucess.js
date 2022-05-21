@@ -3,6 +3,9 @@ const req = require('express/lib/request');
 const res = require('express/lib/response');
 var router = express.Router();
 var registroModel = require('../../models/login_sucessModel');
+var util = require('util');
+var cloudinary = require('cloudinary').v2;
+const uploader = util.promisify(cloudinary.uploader.upload);
 
 /* GET home page. */
 router.get('/', async function (req, res, next) {
@@ -24,13 +27,14 @@ router.get('/agregar', (req, res, next) => {
     res.render('admin/agregar', {
         layout: 'admin/layout',
 
-
     })
 
 });
 
 router.post('/agregar', async (req, res, next) => {
     try {
+
+
         console.log(req.body);
 
         if (req.body.nombre != "" && req.body.apellido != "" && req.body.mail != "") {
@@ -52,6 +56,7 @@ router.post('/agregar', async (req, res, next) => {
             layout: 'admin/layout',
             error: true,
             message: "No se cargo el registro"
+
         })
     }
 })
@@ -62,8 +67,6 @@ router.get('/eliminar/:id', async (req, res, next) => {
     console.log(id);
     await registroModel.deleteRegistro(id);
     res.redirect('/admin/login_sucess');
-
-
 
 });
 
@@ -81,6 +84,7 @@ router.get('/modificar/:id', async (req, res, next) => {
 });
 
 router.post('/modificar', async (req, res, next) => {
+
     try {
 
         var obj = {
@@ -93,6 +97,7 @@ router.post('/modificar', async (req, res, next) => {
         await registroModel.modRegistro(obj, req.body.id);
         res.redirect('/admin/login_sucess');
     }
+
     catch (error) {
 
         console.log(error)

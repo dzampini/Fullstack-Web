@@ -16,7 +16,7 @@
 
 
 <body>
-    <form action="/admin/login_sucess/modificar" method="post">
+    <form action="/admin/login_sucess/modificar" method="post" enctype="multipart/form-data">
     <input type="hidden" value="{{obj.id}}" name="id">
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label"></label>
@@ -30,6 +30,11 @@
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label"></label>
             <input type="email" class="form-control"  value="{{obj.mail}}"id="exampleFormControlInput1" placeholder="Email" name="mail">
+        </div>
+        <div class="mb-3">
+            <label>Imagen</label>
+            <input type="file" name="imagen" id="imagen">
+            </label>
         </div>
 
 
