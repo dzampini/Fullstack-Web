@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-  secret: 'FW_2-0-2-2_rafa',
+  secret: 'FW_2-0-2-2',
   cookie: {maxAge:null},
   resave: false,
   saveUninitializd: true

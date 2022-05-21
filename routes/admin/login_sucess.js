@@ -88,12 +88,11 @@ router.post('/modificar', async (req, res, next) => {
             apellido: req.body.apellido,
             mail: req.body.mail,
         }
+
         console.log(obj)
         await registroModel.modRegistro(obj, req.body.id);
-
         res.redirect('/admin/login_sucess');
     }
-
     catch (error) {
 
         console.log(error)
@@ -101,7 +100,9 @@ router.post('/modificar', async (req, res, next) => {
             layout: 'admin/layout',
             error: true,
             message: "No se modifico el registro"
+
         })
+
     }
 })
 
