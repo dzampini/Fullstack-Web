@@ -3,15 +3,16 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var fileUpload = require('express-fileupload'); 
 var session = require('express-session');
 require('dotenv').config();
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/admin/login');
 var adminRouter = require('./routes/admin/login_sucess');
-
 const { ignore } = require('nodemon/lib/rules');
 const { registerAsyncHelper } = require('hbs');
+
 
 var app = express();
 
@@ -26,10 +27,16 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   secret: 'FW_2-0-2-2',
-  cookie: {maxAge:null},
+  cookie: { maxAge: null },
   resave: false,
   saveUninitializd: true
-}))
+}));
+
+app.use(fileUpload({
+  useTempFiles: true,
+  tempFileDir: '/tmp/'
+}));
+
 
 
 secured = async (req, res, next) => {
@@ -49,6 +56,8 @@ secured = async (req, res, next) => {
     console.log(error);
   }
 }
+
+
 
 
 app.use('/', indexRouter);

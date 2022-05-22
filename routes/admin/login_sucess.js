@@ -1,6 +1,4 @@
 var express = require('express');
-const req = require('express/lib/request');
-const res = require('express/lib/response');
 var router = express.Router();
 var registroModel = require('../../models/login_sucessModel');
 var util = require('util');
@@ -28,22 +26,25 @@ router.get('/agregar', (req, res, next) => {
         layout: 'admin/layout',
 
     })
-
 });
+
 
 router.post('/agregar', async (req, res, next) => {
     try {
-
         var img_id = '';
-        if (req.file && Object.keys(req.files).length > 0){
-            imagen = req.file.imagen;
+        if (req.files && Object.keys(req.files).length>0) {
+            imagen = req.files.imagen;
             img_id = (await uploader(imagen.tempFilepath)).public_id;
         }
-    
-        console.log(req.body);
+
+        console.log(req.body.files);
 
         if (req.body.nombre != "" && req.body.apellido != "" && req.body.mail != "") {
-            await registroModel.insertRegistro(req.body);
+            await registroModel.insertRegistro({
+                ...req.body,
+                 img_id
+            });
+
             res.redirect('/admin/login_sucess')
 
         } else {
