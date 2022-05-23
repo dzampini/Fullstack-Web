@@ -3,13 +3,16 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var fileUpload = require('express-fileupload'); 
 var session = require('express-session');
+var fileUpload = require('express-fileupload');
+//var cors = require('cors');
 require('dotenv').config();
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/admin/login');
 var adminRouter = require('./routes/admin/login_sucess');
+//var apiRouter = requiere('./routes/api');
+
 const { ignore } = require('nodemon/lib/rules');
 const { registerAsyncHelper } = require('hbs');
 
@@ -30,72 +33,47 @@ app.use(session({
   cookie: { maxAge: null },
   resave: false,
   saveUninitializd: true
-}));
-
-app.use(fileUpload({
-  useTempFiles: true,
-  tempFileDir: '/tmp/'
-}));
+}))
 
 
 
 secured = async (req, res, next) => {
   try {
     console.log(req.session.id_usuario);
-    
+
     if (req.session.id_usuario) {
-      
+
       next();
-      
+
     } else {
       res.redirect('/admin/login');
       req.session.destroy();
-      
+
     }
   } catch (error) {
     console.log(error);
   }
-}
+};
 
-
-
+app.use(fileUpload({
+  useTempFiles: true,
+  tempFileDir: '/tmp/'
+}));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/admin/login', loginRouter); 
+app.use('/admin/login', loginRouter);
 app.use('/admin/login_sucess', secured, adminRouter);
-
-/*app.get('/',function(req, res){
-
-  var conocido = Boolean(req.session.nombre);
-
-  res.render('admin/login', {
-    title: 'Inicio de sesion:',
-    ingreso: 'ingrese el Nombre y Password:',
-    conocido: conocido,
-    nombre: req.session.nombre
-  });
-});
-
-app.post('/ingresar', function (req, res) {
-  var nombre = req.body.nombre
-  req.session.nombre = nombre
- 
-  res.redirect('/');
-});
-app.get('/salir', function (req, res) {
-  req.session.destroy();
-  res.redirect('/');
-});*/
+//app.use('/api', cors(), apiRouter);
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

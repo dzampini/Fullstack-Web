@@ -17,7 +17,7 @@ async function insertRegistro(obj) {
                 var rows = await pool.query(query, [obj]);
                 console.log(obj)
                 return rows;
-        } catch (errors) {
+        } catch (error) {
                 console.log(error);
                 throw error;
 

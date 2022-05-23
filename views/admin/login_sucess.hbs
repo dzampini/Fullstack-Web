@@ -14,24 +14,10 @@
 
 <body>
 
-    <div class="collapse" id="navbarToggleExternalContent">
-        <div class="bg-dark p-4">
-            <h5 class="text-white h4">Collapsed content</h5>
-            <span class="text-muted">Toggleable via the navbar brand.</span>
-        </div>
-    </div>
-
-    <nav class="row">
-        <div class="row-button-ses">
-            <p class="text-end"> <a class="btn btn-danger" href="/admin/login/logout"> Cerrar Sesión <i
-                        class="bi bi-box-arrow-in-right"></i></a></p>
-        </div>
-
-    </nav>
+    <div class="collapse" id="navbarToggleExternalContent"><div class="bg-dark p-4"><h5 class="text-white h4">Collapsed content</h5><span class="text-muted">Toggleable via the navbar brand.</span></div></div>
+    <nav class="row"><div class="row-button-ses"><p class="text-end"> <a class="btn btn-danger" href="/admin/login/logout"> Cerrar Sesión <i class="bi bi-box-arrow-in-right"></i></a></p></div></nav>
     <h3 id="registros">REGISTRO DE USUARIOS</h3>
-
     <table class="table caption-top">
-
         <thead>
             <tr>
                 <th scope="col"></th>
@@ -45,27 +31,17 @@
             {{#each registro}}
             <tr>
                 <th scope="row">{{id}}
-
                 <td><a>{{nombre}}</a></td>
                 <td><a>{{apellido}}</a></td>
                 <td><a>{{mail}}</a></td> 
                 <td><a>{{{imagen}}}</a></td>
-
-                <td class="text-end">
-                    <a class="btn btn-secondary" href="/admin/login_sucess/modificar/{{id}}"><i
-                            class="bi bi-pencil"></i></a>
-                    <a class="btn btn-secondary" href="/admin/login_sucess/eliminar/{{id}}"><i
-                            class="bi bi-trash3-fill"></i></a>
-                </td>
+                <td class="text-end"><a class="btn btn-secondary" href="/admin/login_sucess/modificar/{{id}}"><i class="bi bi-pencil"></i></a><a class="btn btn-secondary" href="/admin/login_sucess/eliminar/{{id}}"><i class="bi bi-trash3-fill"></i></a></td>
                 </th>
             </tr>
             {{/each}}
         </tbody>
     </table>
-    <div class="row'" style="margin: top 50px;">
-        <div class="row-button-ag">
-            <p class="text-end"> <a class="btn btn-success" href="/admin/login_sucess/agregar"> agregar</a></p>
-        </div>
+    <div class="row'" style="margin: top 50px;"><div class="row-button-ag"><p class="text-end"> <a class="btn btn-success" href="/admin/login_sucess/agregar"> Agregar</a></p></div>
     </div>
 
 
