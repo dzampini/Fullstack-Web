@@ -20,8 +20,7 @@ router.get('/', async function (req, res, next) {
 });
 
 router.get('/agregar', (req, res, next) => {
-    
-
+        
     res.render('admin/agregar', {
         layout: 'admin/layout',
 
@@ -32,15 +31,15 @@ router.get('/agregar', (req, res, next) => {
 router.post('/agregar', async (req, res, next) => {
     try {
         var img_id = '';
-          if (req.files && Object.keys(req.files).length > 0) {
-          imagen = req.files.imagen;
-          img_id = (await uploader(imagen.tempFilepath)).public_id;
+        if (req.files && Object.keys(req.files).length > 0) {
+            imagen = req.files.imagen;
+            img_id = (await uploader(imagen.tempFilepath)).public_id;
         }
 
         console.log(req.body.files);
 
-            if (req.body.nombre != "" && req.body.apellido != "" && req.body.mail != "") {
-                await registroModel.insertRegistro({...req.body,img_id});
+        if (req.body.nombre!= "" && req.body.apellido!= "" && req.body.mail!= "") {
+            await registroModel.insertRegistro({ ...req.body, img_id });
             
             res.redirect('/admin/login_sucess')
 
@@ -60,9 +59,9 @@ router.post('/agregar', async (req, res, next) => {
             error: true,
             message: "No se cargo el registro"
 
-        })
+        });
     }
-})
+});
 
 router.get('/eliminar/:id', async (req, res, next) => {
 
@@ -110,10 +109,10 @@ router.post('/modificar', async (req, res, next) => {
             error: true,
             message: "No se modifico el registro"
 
-        })
+        });
 
     }
-})
+}); 
 
 module.exports = router;
 

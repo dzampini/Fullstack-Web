@@ -1,18 +1,30 @@
 var express = require('express');
-var router = express.router();
-var registroModel = require('../../models/login_sucessModel');
-var cloudinary = require('cloudinary').v2;
+var router = express.Router();
+var nodemailer=require('nodemailer')
 
-router.get('/', async function (req, res, next) {
+router.post('/contacto', async function (req, res, next) {
 
-    var registro = await registroModel.getRegistro();
+    const mail = {
+        to: 'damianzampini@gmail.com',
+        subject: 'prueba',
+        html: ''
+    }
+    const transport = nodemailer.createTransport({
+        host: process.env.SMTP_HOST,
+        port: process.env.SMTP_PORT,
+        auth: {
+            user: process.env.SMTP_USER,
+            pass: process.env.SMTP_PASS
+        }
+    });
 
-    res.render('admin/login_sucess', {
-        layout: 'admin/layout',
-        usuario: req.body.user,
-        registro
-    })
-    console.log(registro);
-    res.json(registro);
+    await transport.sendMail(mail)
+
+    res.status(201).json({
+        error: false,
+        message: 'Mensaje Enviado'
+    });
 });
+
+    
 module.exports = router;

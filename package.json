@@ -21,6 +21,7 @@
     "md5": "^2.3.0",
     "morgan": "~1.9.1",
     "mysql": "github:mysqljs/mysql",
+    "nodemailer": "^6.7.5",
     "nodemon": "^2.0.16",
     "util": "^0.12.4"
   }

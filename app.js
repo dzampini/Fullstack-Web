@@ -5,13 +5,13 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var fileUpload = require('express-fileupload');
-//var cors = require('cors');
+var cors = require('cors');
 require('dotenv').config();
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/admin/login');
 var adminRouter = require('./routes/admin/login_sucess');
-//var apiRouter = requiere('./routes/api');
+var apiRouter = require('./routes/api');
 
 const { ignore } = require('nodemon/lib/rules');
 const { registerAsyncHelper } = require('hbs');
@@ -33,7 +33,7 @@ app.use(session({
   cookie: { maxAge: null },
   resave: false,
   saveUninitializd: true
-}))
+}));
 
 
 
@@ -64,7 +64,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/admin/login', loginRouter);
 app.use('/admin/login_sucess', secured, adminRouter);
-//app.use('/api', cors(), apiRouter);
+app.use('/api', cors(), apiRouter);
 
 
 // catch 404 and forward to error handler
